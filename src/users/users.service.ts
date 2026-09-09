@@ -13,4 +13,31 @@ export class UsersService {
     const user = this.userRepository.create({ email, password });
     return this.userRepository.save(user);
   }
+
+  findOne(id: number) {
+    return this.userRepository.findOneBy({ id });
+  }
+
+  find(email: string) {
+    return email
+      ? this.userRepository.find({ where: { email } })
+      : this.userRepository.find();
+  }
+
+  async update(id: number, attr: Partial<User>) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    Object.assign(user, attr);
+    return this.userRepository.save(user);
+  }
+
+  async remove(id: number) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return this.userRepository.remove(user);
+  }
 }

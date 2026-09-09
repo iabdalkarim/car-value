@@ -2,6 +2,7 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  BeforeRemove,
   Column,
   Entity,
   PrimaryGeneratedColumn,
@@ -26,6 +27,11 @@ export class User {
   @AfterRemove()
   logRemove() {
     console.log(`Removed user with id: ${this.id}`);
+  }
+
+  @BeforeRemove()
+  logBeforeRemove() {
+    console.log(`About to remove user with id: ${this.id}`);
   }
 
   @AfterUpdate()
