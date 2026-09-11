@@ -1,7 +1,9 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { map, Observable } from 'rxjs';
 
 export class SerializeInterceptor implements NestInterceptor {
+  constructor(private readonly dto: any) {}
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,
@@ -12,7 +14,9 @@ export class SerializeInterceptor implements NestInterceptor {
       map((data: any) => {
         // Run something before the response is sent out
         console.log('Before sending the response...', data);
-        return data;
+        return plainToInstance(this.dto, data, {
+          excludeExtraneousValues: true,
+        });
       }),
     );
   }
