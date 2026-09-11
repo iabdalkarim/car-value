@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### find user by id
-GET http://localhost:3000/auth/1
+GET http://localhost:3000/auth/4
 
 ### find user by email
 GET http://localhost:3000/auth?email=test@example.com
@@ -17,7 +17,7 @@ GET http://localhost:3000/auth?email=test@example.com
 GET http://localhost:3000/auth
 
 ### delete user by id
-DELETE http://localhost:3000/auth/3
+DELETE http://localhost:3000/auth/2
 
 ### update user by id
 PATCH http://localhost:3000/auth/2
